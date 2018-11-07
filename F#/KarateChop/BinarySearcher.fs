@@ -1,19 +1,14 @@
 ﻿module BinarySearcher
 
-let rec binarySearch (array : int[]) x first last =
-    match array with
-    | empty when first > last ->
-        -1
-    | _ ->
-        let middle = (first + last) / 2
-        match array.[middle] with
-        | middleIsEqual when middleIsEqual = x ->
-            middle
-        | middleIsGreater when middleIsGreater > x ->
-            binarySearch array x first (middle - 1)
-        | middleIsLesser when middleIsLesser < x ->
-            binarySearch array x (middle + 1) last
-        | _ -> -1
-
 let search (array : int[]) x =
-    binarySearch array x 0 (array.Length - 1)
+    let rec binarySearch first last =
+        if first > last then
+            -1
+        else
+            let middle = (first + last) / 2
+            match (compare x array.[middle]) with
+            | 0 -> middle
+            | -1 -> binarySearch first (middle - 1)
+            | 1 -> binarySearch (middle + 1) last
+            | _ -> failwith "middle wasn't <,=,or > target"
+    binarySearch 0 (array.Length - 1)

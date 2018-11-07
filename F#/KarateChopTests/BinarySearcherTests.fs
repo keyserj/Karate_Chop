@@ -3,7 +3,7 @@
 open Xunit
 
 [<Fact>]
-let ``Searching empty list returns -1`` () =
+let ``Searching empty list returns not found`` () =
     let actual = BinarySearcher.search [||] 0
     Assert.Equal(-1, actual)
 
